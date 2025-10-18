@@ -1,0 +1,303 @@
+
+srun --nodelist=ExaDELL --pty bash
+salloc --gres=gpu:1 -n 128
+ssh ExaDELL
+
+cd dualsphysics_hip/dualsphysics_hip/src/source/
+
+rm -rf CMakeFiles CMakeCache.txt
+rm -rf build
+mkdir build && cd build
+
+export HIP_DIR=/opt/rocm-6.3.0/lib/cmake/hip
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/opt/rocm-6.3.0/lib/cmake/hip
+export AMDDeviceLibs_DIR=/opt/rocm-6.3.0/lib/cmake/AMDDeviceLibs
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/opt/rocm-6.3.0/lib/cmake/AMDDeviceLibs
+export amd_comgr_DIR=/opt/rocm-6.3.0/lib/cmake/amd_comgr
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/opt/rocm-6.3.0/lib/cmake/amd_comgr
+export hsa_runtime64_DIR=/opt/rocm-6.3.0/lib/cmake/hsa-runtime64
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/opt/rocm-6.3.0/lib/cmake/hsa-runtime64
+export PATH=/opt/rocm-6.3.0/llvm/bin:$PATH
+export LIBRARY_PATH=/opt/rocm-6.3.0/llvm/lib:$LIBRARY_PATH
+export LD_LIBRARY_PATH=/opt/rocm-6.3.0/llvm/lib:$LD_LIBRARY_PATH
+export C_INCLUDE_PATH=/opt/rocm-6.3.0/llvm/include:$C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=/opt/rocm-6.3.0/llvm/include:$CPLUS_INCLUDE_PATH
+
+module load cmake/3.24.2
+module load gnu12/12.4.0
+
+cmake ..   -DCMAKE_BUILD_TYPE=Release   -DCMAKE_PREFIX_PATH=/opt/rocm   -DCMAKE_C_COMPILER=/opt/rocm/llvm/bin/clang   -DCMAKE_CXX_COMPILER=/opt/rocm/llvm/bin/clang++   -DCMAKE_HIP_COMPILER=/opt/rocm/llvm/bin/clang++   -DCMAKE_HIP_ARCHITECTURES=gfx90a
+
+make -j"$(nproc)" 2>&1 | tee build_full.log
+
+
+squeue
+scancel
+
+export HIP_DIR=/opt/rocm-6.4.3/lib/cmake/hip
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/opt/rocm-6.4.3/lib/cmake/hip
+export AMDDeviceLibs_DIR=/opt/rocm-6.4.30/lib/cmake/AMDDeviceLibs
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/opt/rocm-6.4.3/lib/cmake/AMDDeviceLibs
+export amd_comgr_DIR=/opt/rocm-6.4.3/lib/cmake/amd_comgr
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/opt/rocm-6.4.3/lib/cmake/amd_comgr
+export hsa_runtime64_DIR=/opt/rocm-6.4.3/lib/cmake/hsa-runtime64
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/opt/rocm-6.4.3/lib/cmake/hsa-runtime64
+export PATH=/opt/rocm-6.4.3/llvm/bin:$PATH
+export LIBRARY_PATH=/opt/rocm-6.4.3/llvm/lib:$LIBRARY_PATH
+export LD_LIBRARY_PATH=/opt/rocm-6.4.3/llvm/lib:$LD_LIBRARY_PATH
+export C_INCLUDE_PATH=/opt/rocm-6.4.3/llvm/include:$C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=/opt/rocm-6.4.3/llvm/include:$CPLUS_INCLUDE_PATH
+
+---------------------------------------------------------------------------------------------------
+
+Cant archivos.hip existentes: 13
+Prom. líneas de Código .hip: 711
+    2577  ./JSphGpu_ker.hip
+    1984  ./JSphGpu_InOut_iker.hip
+     958  ./JCellDivGpu_ker.hip
+     704  ./JReduSum_ker.hip
+     513  ./JRelaxZone_ker.hip
+     428  ./JSphGpuSimple_ker.hip
+     415  ./JDsGauge_ker.hip
+     285  ./JDsPips_ker.hip
+     195  ./JWaveOrder2_ker.hip
+     172  ./JSphShifting_ker.hip
+     165  ./JCellDivGpuSingle_ker.hip
+     135  ./JDsAccInput_ker.hip
+
+
+Cant archivos.cpp existentes: 90
+Prom. líneas de Código .cpp: 510
+    3049  ./JSph.cpp
+    2278  ./JBinaryData.cpp
+    1888  ./tinyxml.cpp
+    1870  ./JSphCpu.cpp
+    1724  ./Functions.cpp
+    1638  ./tinyxmlparser.cpp
+    1563  ./JSphInOut.cpp
+    1517  ./JSphGpu.cpp
+    1157  ./JSphCpuSingle.cpp
+    1056  ./JCaseProperties.cpp
+     960  ./JChronoObjects.cpp
+     952  ./JXml.cpp
+     942  ./JSphGpuSingle.cpp
+     883  ./JSphInOutZone.cpp 
+     801  ./JCaseParts.cpp
+     779  ./JMotionObj.cpp
+     759  ./JSphCpu_InOut.cpp
+     733  ./JMotion.cpp
+     723  ./FunctionsGeo3d.cpp
+     721  ./JDataArrays.cpp
+     635  ./JSphInOutPoints.cpp
+     594  ./FunctionsHip.cpp
+     591  ./JPartDataBi4.cpp
+     582  ./JNormalsMarrone.cpp
+     555  ./JSphInOutGridData.cpp
+     544  ./JRadixSort.cpp
+     537  ./JLinearValue.cpp
+     520  ./JDsInitialize.cpp
+     506  ./JPartFloatBi4.cpp
+     504  ./JCellDivCpu.cpp
+     487  ./JDsGaugeSystem.cpp
+     466  ./JSphShifting.cpp
+     448  ./JDsFtForcePoints.cpp
+     442  ./JCellDivGpu.cpp
+     434  ./JPartDataHead.cpp
+     422  ./JWaveAwasZsurf.cpp
+     413  ./JDsMooredFloatings.cpp
+     412  ./JDsAccInput.cpp
+     402  ./JCaseEParms.cpp
+     389  ./JSphCfgRun.cpp
+     389  ./JSphBoundCorr.cpp
+     355  ./JReadDatafile.cpp
+     353  ./JLog2.cpp
+     349  ./JDsDamping.cpp
+     346  ./JPartsLoad4.cpp
+     335  ./JMotionMov.cpp
+     333  ./JCellDivCpuSingle.cpp
+     325  ./JSphGpuSingle_InOut.cpp
+     325  ./JDsPips.cpp
+     303  ./JSphMk.cpp
+     303  ./JSphCpuSingle_InOut.cpp
+     291  ./JCaseCtes.cpp
+     276  ./JArraysCpu.cpp
+     270  ./JDebugSphGpu.cpp
+     265  ./JOutputCsv.cpp
+     262  ./JDsSaveDt.cpp
+     261  ./JRelaxZonesGpu.cpp
+     260  ./JCfgRunBase.cpp
+     259  ./JPartNormalData.cpp
+     257  ./JSaveCsv2.cpp
+     254  ./JDsGaugeItem.cpp
+     253  ./JPartOutBi4Save.cpp
+     244  ./JRangeFilter.cpp
+     240  ./JCaseVtkOut.cpp
+     237  ./JCellDivGpuSingle.cpp
+     232  ./JArraysGpu.cpp
+     207  ./JSimpleNeigs.cpp
+     206  ./JDsMotion.cpp
+     198  ./JTimeControl.cpp
+     197  ./JMotionList.cpp
+     196  ./main.cpp
+     185  ./randomc.cpp
+     183  ./JDsOutputTime.cpp
+     174  ./JAppInfo.cpp
+     162  ./JCaseUserVars.cpp
+     146  ./JMeanValues.cpp
+     143  ./JDsFixedDt.cpp
+     130  ./JMLPistonsGpu.cpp
+     129  ./JDsViscoInput.cpp
+     126  ./JDsPartsOut.cpp
+     117  ./tinystr.cpp
+     107  ./JMotionPos.cpp
+     103  ./FunSphKernelsCfg.cpp
+     102  ./JWaveSpectrumGpu.cpp
+      93  ./JObject.cpp
+      93  ./JDsPartsInit.cpp
+      88  ./JException.cpp
+      79  ./JDsphConfig.cpp
+      54  ./tinyxmlerror.cpp
+      51  ./JObjectGpu.cpp
+
+Cant archivos.h existentes: 140
+Prom. líneas de Código .h: 177
+    1803  ./tinyxml.h
+     999  ./JXml.h
+     824  ./FunctionsGeo3d.h
+     616  ./JChronoData.h
+     612  ./TypesDef.h
+     557  ./DualSphDef.h
+     547  ./JSph.h
+     472  ./JDsGaugeItem.h
+     462  ./JBinaryData.h
+     442  ./FunctionsMath_iker.h
+     424  ./JMatrix4.h
+     401  ./JCaseParts.h
+     362  ./JSphCpu.h
+     355  ./FunctionsMath.h
+     353  ./Functions.h
+     327  ./JMotionMov.h
+     321  ./tinystr.h
+     314  ./JSphInOut.h
+     303  ./FunSphKernel.h
+     301  ./JSphGpu.h
+     287  ./JSphGpu_ker.h
+     277  ./JSphInOutZone.h
+     268  ./JPartDataBi4.h
+     261  ./JCaseProperties.h
+     247  ./JDsInitialize.h
+     237  ./JSaveCsv2.h
+     236  ./JPartDataHead.h
+     220  ./JDataArrays.h
+     216  ./JCaseCtes.h
+     214  ./DSPHChronoLib.h
+     208  ./JCellDivCpu.h
+     207  ./JMLPistons.h
+     202  ./JCellDivGpu.h
+     201  ./JPartFloatBi4.h
+     200  ./randomc.h
+     198  ./JVtkLib.h
+     193  ./FunSphKernel_iker.h
+     185  ./FunctionsHip.h
+     180  ./JCellSearch_iker.h
+     179  ./JSphTimersGpu.h
+     176  ./JMotion.h
+     173  ./JSphTimersCpu.h
+     170  ./JSphInOutGridData.h
+     166  ./JWaveAwasZsurf.h
+     164  ./JDsMooredFloatings.h
+     162  ./JSphShifting.h
+     159  ./JSphBoundCorr.h
+     157  ./JLinearValue.h
+     155  ./JRelaxZonesGpu.h
+     154  ./JPartOutBi4Save.h
+     151  ./JSphMk.h
+     150  ./JChronoObjects.h
+     150  ./JArraysCpu.h
+     148  ./JArraysGpu.h
+     141  ./JRadixSort.h
+     141  ./JMotionObj.h
+     141  ./JDsGaugeSystem.h
+     138  ./JDsAccInput.h
+     136  ./JPartsLoad4.h
+     136  ./JDsFtForcePoints.h
+     136  ./JCaseEParms.h
+     135  ./JWaveGen.h
+     135  ./JRelaxZones.h
+     134  ./JPartNormalData.h
+     132  ./JSphInOutPoints.h
+     132  ./JLog2.h
+     123  ./JReadDatafile.h
+     123  ./JDsSaveDt.h
+     121  ./JAppInfo.h
+     120  ./JSphGpu_InOut_iker.h
+     115  ./DSphMoorDyn.h
+     112  ./JDsPips.h
+     110  ./JMotionList.h
+     109  ./JDsDamping.h
+     108  ./JNormalsMarrone.h
+     108  ./JDsMotion.h
+     108  ./JCellSearch_inline.h
+     107  ./JTimer.h
+     107  ./JSphCpuSingle.h
+     107  ./JPeriodicDef.h
+     106  ./JVtkLibUndef.h
+     106  ./JNumexLib.h
+     104  ./JCaseVtkOut.h
+     102  ./JTimeControl.h
+      98  ./JDsPartsOut.h
+      96  ./JSphGpuSingle.h
+      96  ./JMeanValues.h
+      92  ./JDebugSphGpu.h
+      90  ./JSphCfgRun.h
+      90  ./JDsOutputTime.h
+      89  ./JCfgRunBase.h
+      87  ./JParticlesDef.h
+      87  ./JNumexLibUndef.h
+      86  ./JDsFixedDt.h
+      85  ./JRelaxZone_ker.h
+      84  ./JMLPistonsGpu.h
+      82  ./JSimpleNeigs.h
+      81  ./JCellDivDataGpu.h
+      80  ./JReduSum_ker.h
+      80  ./JRangeFilter.h
+      80  ./JDsViscoInput.h
+      78  ./JObject.h
+      78  ./JCaseUserVars.h
+      78  ./FunctionsGeo3d_iker.h
+      76  ./JCellDivDataCpu.h
+      74  ./JOutputCsv.h
+      74  ./JDsPartsInit.h
+      72  ./JObjectGpu.h
+      72  ./FunSphEos.h
+      71  ./JTimerCuda.h
+      69  ./JChronoObjectsUndef.h
+      69  ./FunSphEos_iker.h
+      68  ./FunctionsBasic_iker.h
+      67  ./JCellDivGpu_ker.h
+      64  ./JWaveSpectrumGpu.h
+      64  ./JDsphConfig.h
+      63  ./JException.h
+      61  ./JMotionPos.h
+      60  ./JSphGpuSimple_ker.h
+      59  ./JCellDivCpuSingle.h
+      58  ./JTimerClock.h
+      58  ./JCellDivGpuSingle.h
+      56  ./JDsGauge_ker.h
+      55  ./FunSphKernelDef.h
+      54  ./HipMathConstants.h
+      53  ./JSphShifting_ker.h
+      51  ./JWaveGenUndef.h
+      50  ./OmpDefs.h
+      48  ./JWaveOrder2_ker.h
+      48  ./FunSphKernelsCfg.h
+      47  ./JMotionEvent.h
+      45  ./JDsAccInput_ker.h
+      44  ./JDsPips_ker.h
+      44  ./DSphMoorDynUndef.h
+      33  ./JCellDivGpuSingle_ker.h
+      26  ./JVtkLibDef.h
+      21  ./JCasePartsDef.h
+      20  ./JLinearValueDef.h
+      20  ./JAppInfoDef.h
+      19  ./JNumexLibDef.h
