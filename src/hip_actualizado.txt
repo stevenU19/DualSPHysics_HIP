@@ -1,0 +1,45 @@
+module load cmake/3.24.2
+module load gnu12/12.4.0
+
+srun --nodelist=ExaDELL --pty bash
+salloc --gres=gpu:1 -n 128
+ ssh ExaDELL
+
+
+
+export HIP_DIR=/opt/rocm-6.3.0/lib/cmake/hip
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/opt/rocm-6.3.0/lib/cmake/hip
+
+export AMDDeviceLibs_DIR=/opt/rocm-6.3.0/lib/cmake/AMDDeviceLibs
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/opt/rocm-6.3.0/lib/cmake/AMDDeviceLibs
+
+
+export amd_comgr_DIR=/opt/rocm-6.3.0/lib/cmake/amd_comgr
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/opt/rocm-6.3.0/lib/cmake/amd_comgr
+
+export hsa_runtime64_DIR=/opt/rocm-6.3.0/lib/cmake/hsa-runtime64
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/opt/rocm-6.3.0/lib/cmake/hsa-runtime64
+
+
+export PATH=/opt/rocm-6.3.0/llvm/bin:$PATH
+
+
+
+export LIBRARY_PATH=/opt/rocm-6.3.0/llvm/lib:$LIBRARY_PATH
+export LD_LIBRARY_PATH=/opt/rocm-6.3.0/llvm/lib:$LD_LIBRARY_PATH
+export C_INCLUDE_PATH=/opt/rocm-6.3.0/llvm/include:$C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=/opt/rocm-6.3.0/llvm/include:$CPLUS_INCLUDE_PATH
+
+
+
+cmake .. -DCMAKE_C_COMPILER=/opt/rocm-6.3.0/llvm/bin/clang \
+         -DCMAKE_CXX_COMPILER=/opt/rocm-6.3.0/llvm/bin/clang++\
+         -DCMAKE_CXX_FLAGS="--rocm-device-lib-path=$ROCM_DEVICE_LIB_PATH" 
+
+         -DENABLE_GPU=ON \
+         -DHIP_FOUND=ON \
+         -DENABLE_MOORDYN=ON \
+         -DENABLE_CHRONO=ON \
+         -DENABLE_CHRONO_OMP=ON \
+         -DCMAKE_BUILD_TYPE=Release
+

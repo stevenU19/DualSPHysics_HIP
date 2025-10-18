@@ -1,0 +1,8 @@
+/home/fasanchezc/dualsphysics_hip/dualsphysics_hip/src/source/build/CMakeFiles/DualSPHysics5.0CPU_linux64.dir
+/home/fasanchezc/dualsphysics_hip/dualsphysics_hip/src/source/build/CMakeFiles/DualSPHysics5.0_linux64.dir
+/home/fasanchezc/dualsphysics_hip/dualsphysics_hip/src/source/build/CMakeFiles/edit_cache.dir
+/home/fasanchezc/dualsphysics_hip/dualsphysics_hip/src/source/build/CMakeFiles/rebuild_cache.dir
+/home/fasanchezc/dualsphysics_hip/dualsphysics_hip/src/source/build/CMakeFiles/list_install_components.dir
+/home/fasanchezc/dualsphysics_hip/dualsphysics_hip/src/source/build/CMakeFiles/install.dir
+/home/fasanchezc/dualsphysics_hip/dualsphysics_hip/src/source/build/CMakeFiles/install/local.dir
+/home/fasanchezc/dualsphysics_hip/dualsphysics_hip/src/source/build/CMakeFiles/install/strip.dir
