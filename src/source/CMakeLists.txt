@@ -7,14 +7,14 @@ cmake_minimum_required(VERSION 3.10)
 project(DualSPHysics)
 
 #------------------------------------------------------------------
-# Coupling options
+# Opciones de Acoplamiento
 #------------------------------------------------------------------
 option(ENABLE_MOORDYN "Enable the MoorDyn+ library" ON)
 option(ENABLE_CHRONO "Enable the Chrono Engine library" ON)
 option(ENABLE_CHRONO_OMP "Enable the Chrono Parallel module" ON)
 
 #------------------------------------------------------------------
-# Source files
+# Archivos fuente
 #------------------------------------------------------------------
 # CPU Objects
 set(OBJXML JXml.cpp tinystr.cpp tinyxml.cpp tinyxmlerror.cpp tinyxmlparser.cpp)
@@ -30,10 +30,10 @@ set(OBSPHGPU JArraysGpu.cpp JDebugSphGpu.cpp JCellDivGpu.cpp JSphGpu.cpp JSphGpu
 set(OBSPHSINGLEGPU JCellDivGpuSingle.cpp JSphGpuSingle.cpp)
 set(OBHIP JCellDivGpu_ker.hip JCellDivGpuSingle_ker.hip JDsPips_ker.hip JDsGauge_ker.hip JReduSum_ker.hip JSphShifting_ker.hip JDsAccInput_ker.hip JSphGpu_ker.hip JSphGpuSimple_ker.hip JWaveOrder2_ker.hip JSphGpu_InOut_iker.hip)
 
-# Otros objetos relacionados con la relajación en GPU
+# Objetos relacionados con la relajacion en GPU
 set(OBRELAXZONEGPU JRelaxZonesGpu.cpp JRelaxZone_ker.hip)
 
-# Otros objetos relacionados con la división de celdas en GPU
+# Objetos relacionados con la division de celdas en GPU
 set(OBCELLDIVGPU JCellDivGpu.cpp JCellDivGpuSingle.cpp)
 
 # Otros Objetos
@@ -45,23 +45,23 @@ set(OBINOUT JSphCpu_InOut.cpp JSphCpuSingle_InOut.cpp JSphBoundCorr.cpp JSphInOu
 set(OBINOUTGPU JSphGpuSingle_InOut.cpp)
 set(OBMDBC JPartNormalData.cpp JNormalsMarrone.cpp)
 
-# Inclusión de namespaces específicos para HIP
+# Inclusion de namespaces especificos para HIP
 set(OBNAMESPACEINOUT JSphGpu_InOut_iker.hip)  # Archivos de 'cusphinout'
 set(OBNAMESPACERELAXZONE JRelaxZone_ker.hip)  # Archivos de 'curelaxzone'
 set(OBNAMESPACEHIPDIV JCellDivGpu_ker.hip JCellDivGpuSingle_ker.hip)  # Archivos de 'hipdiv'
 
-# Combinación de todos los objetos GPU en un solo conjunto
+# Combinacion de todos los objetos GPU en un solo conjunto
 set(ALLGPU ${OBCOMMONGPU} ${OBSPHGPU} ${OBSPHSINGLEGPU} ${OBHIP} ${OBRELAXZONEGPU} ${OBCELLDIVGPU} ${OBWAVERZHIP} ${OBINOUTGPU} ${OBNAMESPACEINOUT} ${OBNAMESPACERELAXZONE} ${OBNAMESPACEHIPDIV})
 
 
 #------------------------------------------------------------------
-# Set Compilation Flags
+# Establecer banderas de compilaciÃ³n
 #------------------------------------------------------------------
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -std=c++14 -fPIC -D_GLIBCXX_USE_CXX11_ABI=0")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 #------------------------------------------------------------------
-# Find HIP and ROCm Libraries
+# Encontrar librerias de HIP and ROCm
 #------------------------------------------------------------------
 find_package(HIP REQUIRED)
 
@@ -74,7 +74,7 @@ else()
 endif()
 
 #------------------------------------------------------------------
-# OpenMP Configuration
+# Configuracion OpenMP
 #------------------------------------------------------------------
 find_package(OpenMP)
 
@@ -87,7 +87,7 @@ else()
 endif()
 
 #------------------------------------------------------------------
-# Define Output Directory
+# Definir directorio de salida
 #------------------------------------------------------------------
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../../bin/linux)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
@@ -119,7 +119,7 @@ if (HIP_FOUND)
   add_executable(DualSPHysics5.0_linux64 ${OBJXML} ${OBJSPHMOTION} ${OBCOMMON} ${OBCOMMONDSPH} ${OBSPH} ${OBSPHSINGLE} ${OBCOMMONGPU} ${OBSPHGPU} ${OBSPHSINGLEGPU} ${OBHIP} ${OBRELAXZONEGPU} ${OBCELLDIVGPU} ${OBWAVERZ} ${OBWAVERZHIP} ${OBCHRONO} ${OBMOORDYN} ${OBINOUT} ${OBINOUTGPU} ${OBMDBC})
 
 
-  # Enlace para GPU
+# Enlace para GPU
 target_link_libraries(DualSPHysics5.0_linux64 
       /home/fasanchezc/dualsphysics_hip/dualsphysics_hip/src/lib/linux_gcc/libdsphmoordyn_64.a 
       /home/fasanchezc/dualsphysics_hip/dualsphysics_hip/src/lib/linux_gcc/libChronoEngine.so 
@@ -135,7 +135,7 @@ target_link_libraries(DualSPHysics5.0_linux64
 endif()
 
 #------------------------------------------------------------------
-# Coupled Libraries
+# Librerias acopladas
 #------------------------------------------------------------------
 if(ENABLE_MOORDYN)
   message(STATUS "Using MoorDyn+")

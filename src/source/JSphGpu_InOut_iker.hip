@@ -42,7 +42,6 @@ namespace cusphinout {
 
 //##############################################################################
 //# Kernels for inlet/outlet (JSphInOut).
-//# Kernels para inlet/outlet (JSphInOut).
 //##############################################################################
 
 //------------------------------------------------------------------------------
@@ -59,7 +58,6 @@ __global__ void KerInOutIgnoreFluidDef(unsigned n,typecode cod,typecode codnew,t
 
 //==============================================================================
 /// Mark special fluid particles to ignore.
-/// Marca las particulas fluidas especiales para ignorar.
 //==============================================================================
 void InOutIgnoreFluidDef(unsigned n,typecode cod,typecode codnew,typecode *code){
   if(n){
@@ -91,7 +89,6 @@ __device__ double3 KerInteraction_PosNoPeriodic(double3 posp1)
 
 //------------------------------------------------------------------------------
 /// Updates fluid particle position according to current position.
-/// Actualizacion de posicion de particulas fluidas segun posicion actual.
 //------------------------------------------------------------------------------
 template<bool periactive> __global__ void KerUpdatePosFluid(unsigned n,unsigned pini
   ,double2 *posxy,double *posz,unsigned *dcell,typecode *code)
@@ -107,7 +104,6 @@ template<bool periactive> __global__ void KerUpdatePosFluid(unsigned n,unsigned 
 
 //==============================================================================
 /// Updates fluid particle position according to current position.
-/// Actualizacion de posicion de particulas fluidas segun posicion actual.
 //==============================================================================
 void UpdatePosFluid(byte periactive,unsigned n,unsigned pini
   ,double2 *posxy,double *posz,unsigned *dcell,typecode *code)
@@ -289,7 +285,6 @@ __device__ float KerInOutCalcVel(byte vprof,const float4 &vdata,float posz){
 
 //------------------------------------------------------------------------------
 /// Updates velocity and rhop of inlet/outlet particles when it is not extrapolated. 
-/// Actualiza velocidad y densidad de particulas inlet/outlet cuando no es extrapolada.
 //------------------------------------------------------------------------------
 __global__ void KerInOutUpdateData(unsigned n,const unsigned *inoutpart
   ,byte izone,byte rmode,byte vmode,byte vprof,byte refillspfull
@@ -338,7 +333,6 @@ __global__ void KerInOutUpdateData(unsigned n,const unsigned *inoutpart
 
 //==============================================================================
 /// Updates velocity and rhop of inlet/outlet particles when it is not extrapolated. 
-/// Actualiza velocidad y densidad de particulas inlet/outlet cuando no es extrapolada.
 //==============================================================================
 void InOutUpdateData(unsigned n,const unsigned *inoutpart
   ,byte izone,byte rmode,byte vmode,byte vprof,byte refillspfull
@@ -356,7 +350,6 @@ void InOutUpdateData(unsigned n,const unsigned *inoutpart
 
 //------------------------------------------------------------------------------
 /// Updates velocity and rhop of inlet/outlet particles when it is not extrapolated. 
-/// Actualiza velocidad y densidad de particulas inlet/outlet cuando no es extrapolada.
 //------------------------------------------------------------------------------
 __global__ void KerInoutClearInteractionVars(unsigned n,unsigned pini,const typecode *code
   ,float3 *ace,float *ar,float *viscdt,float4 *shiftposfs)
@@ -375,7 +368,6 @@ __global__ void KerInoutClearInteractionVars(unsigned n,unsigned pini,const type
 
 //==============================================================================
 /// Updates velocity and rhop of inlet/outlet particles when it is not extrapolated. 
-/// Actualiza velocidad y densidad de particulas inlet/outlet cuando no es extrapolada.
 //==============================================================================
 void InoutClearInteractionVars(unsigned npf,unsigned pini,const typecode *code
   ,float3 *ace,float *ar,float *viscdt,float4 *shiftposfs)
@@ -389,7 +381,6 @@ void InoutClearInteractionVars(unsigned npf,unsigned pini,const typecode *code
 
 //------------------------------------------------------------------------------
 /// Updates velocity and rhop for M1 variable when Verlet is used. 
-/// Actualiza velocidad y densidad de varible M1 cuando se usa Verlet.
 //------------------------------------------------------------------------------
 __global__ void KerInOutUpdateVelrhopM1(unsigned n,const int *inoutpart
   ,const float4 *velrhop,float4 *velrhopm1)
@@ -403,7 +394,6 @@ __global__ void KerInOutUpdateVelrhopM1(unsigned n,const int *inoutpart
 
 //==============================================================================
 /// Updates velocity and rhop for M1 variable when Verlet is used. 
-/// Actualiza velocidad y densidad de varible M1 cuando se usa Verlet.
 //==============================================================================
 void InOutUpdateVelrhopM1(unsigned n,const int *inoutpart
   ,const float4 *velrhop,float4 *velrhopm1)
@@ -480,7 +470,6 @@ void InOutComputeStep(unsigned n,int *inoutpart,const float4 *planes
 
 //------------------------------------------------------------------------------
 /// Create list for new inlet particles to create.
-/// Crea lista de nuevas particulas inlet a crear.
 //------------------------------------------------------------------------------
 __global__ void KerInOutListCreate(unsigned n,unsigned nmax,const byte *newizone,int *inoutpart)
 {
@@ -505,9 +494,6 @@ __global__ void KerInOutListCreate(unsigned n,unsigned nmax,const byte *newizone
 //==============================================================================
 /// Create list for new inlet particles to create at end of inoutpart[]. 
 /// Returns number of new particles to create.
-/// 
-/// Crea lista de nuevas particulas inlet a crear al final de inoutpart[].
-/// Devuelve el numero de las nuevas particulas para crear.
 //==============================================================================
 unsigned InOutListCreate(bool stable,unsigned n,unsigned nmax,const byte *newizone,int *inoutpart)
 {
@@ -865,7 +851,6 @@ float InOutComputeZsurf(unsigned nptz,const float3 *ptzpos,float maxdist,float z
 
 //------------------------------------------------------------------------------
 /// Perform interaction between ghost inlet/outlet nodes and fluid particles. GhostNodes-Fluid
-/// Realiza interaccion entre ghost inlet/outlet nodes y particulas de fluido. GhostNodes-Fluid
 //------------------------------------------------------------------------------
 template<bool sim2d,TpKernel tker> __global__ void KerInteractionInOutExtrap_Double
   (unsigned inoutcount,const int *inoutpart,const byte *cfgzone,byte computerhopmask,byte computevelmask
@@ -1050,7 +1035,6 @@ template<bool sim2d,TpKernel tker> __global__ void KerInteractionInOutExtrap_Dou
 
 //------------------------------------------------------------------------------
 /// Perform interaction between ghost inlet/outlet nodes and fluid particles. GhostNodes-Fluid
-/// Realiza interaccion entre ghost inlet/outlet nodes y particulas de fluido. GhostNodes-Fluid
 //------------------------------------------------------------------------------
 template<bool sim2d,TpKernel tker> __global__ void KerInteractionInOutExtrap_Single
   (unsigned inoutcount,const int *inoutpart,const byte *cfgzone,byte computerhopmask,byte computevelmask
@@ -1235,7 +1219,6 @@ template<bool sim2d,TpKernel tker> __global__ void KerInteractionInOutExtrap_Sin
 
 //------------------------------------------------------------------------------
 /// Perform interaction between ghost inlet/outlet nodes and fluid particles. GhostNodes-Fluid
-/// Realiza interaccion entre ghost inlet/outlet nodes y particulas de fluido. GhostNodes-Fluid
 //------------------------------------------------------------------------------
 template<bool sim2d,TpKernel tker> __global__ void KerInteractionInOutExtrap_FastSingle
   (unsigned inoutcount,const int *inoutpart,const byte *cfgzone,byte computerhopmask,byte computevelmask
@@ -1419,7 +1402,6 @@ template<bool sim2d,TpKernel tker> __global__ void KerInteractionInOutExtrap_Fas
 
 //==============================================================================
 /// Perform interaction between ghost inlet/outlet nodes and fluid particles. GhostNodes-Fluid
-/// Realiza interaccion entre ghost inlet/outlet nodes y particulas de fluido. GhostNodes-Fluid
 //==============================================================================
 template<TpKernel tker> void Interaction_InOutExtrapT(byte doublemode,bool simulate2d
   ,unsigned inoutcount,const int *inoutpart,const byte *cfgzone,byte computerhopmask,byte computevelmask
@@ -1451,7 +1433,6 @@ template<TpKernel tker> void Interaction_InOutExtrapT(byte doublemode,bool simul
 
 //==============================================================================
 /// Perform interaction between ghost inlet/outlet nodes and fluid particles. GhostNodes-Fluid
-/// Realiza interaccion entre ghost inlet/outlet nodes y particulas de fluido. GhostNodes-Fluid
 //==============================================================================
 void Interaction_InOutExtrap(byte doublemode,bool simulate2d,TpKernel tkernel
   ,unsigned inoutcount,const int *inoutpart,const byte *cfgzone,byte computerhopmask,byte computevelmask
@@ -1479,7 +1460,6 @@ void Interaction_InOutExtrap(byte doublemode,bool simulate2d,TpKernel tkernel
 
 //##############################################################################
 //# Kernels to extrapolate rhop on boundary particles (JSphBoundCorr).
-//# Kernels para extrapolar rhop en las particulas de contorno (JSphBoundCorr).
 //##############################################################################
 //------------------------------------------------------------------------------
 /// Perform interaction between ghost node of selected boundary and fluid.
@@ -1876,7 +1856,6 @@ void Interaction_BoundCorr(byte doublemode,bool simulate2d,TpKernel tkernel
 
 //##############################################################################
 //# Kernels to interpolate velocity (JSphInOutGridDataTime).
-//# Kernels para interpolar valores de velocidad (JSphInOutGridDataTime).
 //##############################################################################
 //------------------------------------------------------------------------------
 /// Interpolate data between time0 and time1.
