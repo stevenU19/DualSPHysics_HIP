@@ -39,5 +39,9 @@ Consulta el archivo `LICENSE` para más detalles.
 
 ## 👥 Autores
 
+Proyecto desarrollado por:  
 **Wilmer Farfán** y **Fabián Sánchez**  
-Proyecto académico: *“Análisis de la portabilidad de la implementación de métodos numéricos de hidrodinámica de partículas suaves en diferentes plataformas y frameworks CPU/GPU.”*
+
+Como parte del trabajo de grado titulado:  
+> *“Análisis de la portabilidad de la implementación de métodos numéricos de hidrodinámica de partículas suaves en diferentes plataformas y frameworks CPU/GPU.”*
+
