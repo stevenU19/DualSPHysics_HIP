@@ -1,7 +1,7 @@
 # ⚙️ DualSPHysics_HIP
 **Versión adaptada de DualSPHysics v5.0 al entorno HIP/ROCm**
 
-Este repositorio corresponde a la **traducción y adaptación progresiva** del código base de DualSPHysics 5.0 para su ejecución sobre **GPUs AMD** utilizando la plataforma **ROCm (Radeon Open Compute)** y el framework **HIP (Heterogeneous-compute Interface for Portability)**.  
+Este repositorio corresponde a la **traducción y adaptación progresiva** del código base de DualSPHysics 5.0 optimizado en CUDA, para su ejecución sobre **GPUs AMD**, utilizando la plataforma **ROCm (Radeon Open Compute)** y el framework **HIP (Heterogeneous-compute Interface for Portability)**.  
 Proyecto disponible en: [github.com/Nicolasg2c/DualSPHysics](https://github.com/Nicolasg2c/DualSPHysics)
 
 ---
